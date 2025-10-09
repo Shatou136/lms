@@ -146,6 +146,7 @@ export function Menubar({editor}: iAppProps) {
                 <TooltipContent>Ordered List</TooltipContent>
             </Tooltip>
             </div>
+            
             <div className="w-px h-6 bg-border mx-2"></div>
             <div className="flex flex-wrap gap-1">
             <Tooltip>

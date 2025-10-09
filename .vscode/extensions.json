@@ -1,6 +1,7 @@
 {
     "recommendations": [
         "prisma.prisma-insider",
-        "prisma.prisma"
+        "prisma.prisma",
+        "ms-vscode.vscode-typescript-next"
     ]
 }
