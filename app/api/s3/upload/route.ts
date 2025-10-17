@@ -1,11 +1,12 @@
 import { env } from "@/lib/env";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
-import { error } from "console";
 import { NextResponse } from "next/server";
 import {z} from "zod";
 import { v4 as uuidv4 } from 'uuid';
 import {getSignedUrl} from "@aws-sdk/s3-request-presigner";
 import { S3 } from "@/lib/S3Client";
+import arcjets, { detectBot, fixedWindow } from "@/lib/arcjets";
+import { requireAdmin } from "@/app/data/admin/require-Admin";
 
 export const fileUploadSchema = z.object({
     fileName: z.string().min(1, {message: "Filename is required"}),
@@ -14,9 +15,36 @@ export const fileUploadSchema = z.object({
     isImage: z.boolean(),
 });
 
+const aj = arcjets.withRule(
+    detectBot({
+        mode: "LIVE",
+        allow: [],
+    })
+).withRule(
+    fixedWindow({
+        mode: "LIVE",
+        window: "1m",
+        max: 6,
+    })
+);
+
 export async function POST(request: Request) {
 
+const session = await requireAdmin();
+
     try {
+
+        const decision = await aj.protect(request, {
+            fingerprint: session?.user.id as string,
+        });
+
+        if(decision.isDenied()) {
+            return NextResponse.json(
+                { error: "dudde not good" },
+                { status: 429 }
+            );
+        }
+
 const body = await request.json();
 
 const validation = fileUploadSchema.safeParse(body);
