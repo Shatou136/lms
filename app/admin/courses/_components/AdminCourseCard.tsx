@@ -48,8 +48,11 @@ const thumbnailUrl = useConstructUrl(data.fileKey);
     </DropdownMenuContent>
  </DropdownMenu>
             </div>
-            <Image src={thumbnailUrl} alt="Thumbnail Url" width={600} height={400} 
+            <Image
+             src={thumbnailUrl} 
+            alt="Thumbnail Url" width={600} height={400} 
             className="w-full rounded-tl-lg aspect-video h-full object-cover" 
+            // unoptimized
             />
 
             <CardContent className="p-4">
