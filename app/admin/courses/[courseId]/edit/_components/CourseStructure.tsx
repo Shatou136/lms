@@ -8,7 +8,7 @@ import {CSS} from '@dnd-kit/utilities';
 import { AdminCourseSingularType } from "@/app/data/admin/admin-get-course";
 import { cn } from "@/lib/utils";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { ChevronDown, ChevronRight, FileText, GripVertical, Trash2 } from "lucide-react";
+import { ChevronDown, ChevronRight, FileText, GripVertical } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { toast } from "sonner";
@@ -16,6 +16,7 @@ import { reorderChapters, reorderLessons } from "../action";
 import { NewChapterModal } from "./NewChapterModal";
 import { NewLessonModal } from "./NewLessonModal";
 import { DeleteLesson } from "./DeleteLesson";
+import { DeleteChapter } from "./DeleteChapter";
 
 
 interface iAppProps {
@@ -319,9 +320,7 @@ export function CourseStructure({data}: iAppProps) {
                             </p>
                             </div>                     
 
-                           <Button size="icon" variant="outline">
-                            <Trash2 className="size-4"/>
-                           </Button>
+                           <DeleteChapter chapterId={item.id} courseId={item.id} />
                             </div>
 
                             <CollapsibleContent>
@@ -352,7 +351,11 @@ export function CourseStructure({data}: iAppProps) {
                                 {lesson.title}
                                 </Link>
                                 </div>
-                                <DeleteLesson /> 
+                                <DeleteLesson 
+                                chapterId={item.id}
+                                courseId={item.id}
+                                lessonId={item.id}
+                                /> 
                                </div>
                                )}
                               </SortableItem>

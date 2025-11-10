@@ -3,17 +3,15 @@ import { Button } from "@/components/ui/button";
 import { tryCatch } from "@/hooks/try-catch";
 import { Trash2 } from "lucide-react";
 import { useState, useTransition } from "react";
-import { deleteLesson } from "../action";
+import { deleteChapter } from "../action";
 import { toast } from "sonner";
 
-export function DeleteLesson({
+export function DeleteChapter({
    chapterId,
     courseId,
-    lessonId,
 }: {
     chapterId: string;
     courseId: string;
-    lessonId: string;
 }) {
     const [open, setOpen] = useState(false);
     const [pending, startTransition] = useTransition();
@@ -21,7 +19,7 @@ export function DeleteLesson({
     async function onSubmit() {
       startTransition(async () => {
         const { data: result, error } = await tryCatch(
-          deleteLesson({ chapterId, courseId, lessonId })
+          deleteChapter({ chapterId, courseId })
         );
 
     if(error) {
@@ -51,8 +49,8 @@ export function DeleteLesson({
     <AlertDialogHeader>
       <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
       <AlertDialogDescription>
-        This action cannot be undone. This will permanently delete this
-         lesson.
+        This action cannot be undone. This will permanently delete this 
+       Chapter .
       </AlertDialogDescription>
     </AlertDialogHeader>
     <AlertDialogFooter>
