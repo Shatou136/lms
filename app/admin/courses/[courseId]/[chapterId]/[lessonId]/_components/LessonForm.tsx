@@ -63,7 +63,7 @@ return (
                 <FormItem>
                  <FormLabel>Lesson Name</FormLabel> 
                   <FormControl>
-                    <Input placeholder="Chapter xyz" {...field} />
+                    <Input placeholder="Chapter yxz" {...field} />
                   </FormControl> 
                   <FormMessage />
                 </FormItem>

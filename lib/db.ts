@@ -1,4 +1,8 @@
 import { PrismaClient } from "./generated/prisma";
+import { wakeNeon } from "./wakeNeon";
+
+
+await wakeNeon();  //neon gpt soln line
 
 const globalForPrisma = global as unknown as { prisma: PrismaClient };
 
