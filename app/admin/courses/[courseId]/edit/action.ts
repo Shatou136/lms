@@ -414,7 +414,7 @@ export async function deleteChapter({
 
   await prisma.$transaction([
     ...updates,
-    prisma.lesson.delete({
+    prisma.chapter.delete({
         where: {
             id:  chapterId,
         },
