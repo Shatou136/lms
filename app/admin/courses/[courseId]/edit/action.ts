@@ -316,7 +316,7 @@ export async function deleteLesson({
   const lessons = chapterWithLessons.lessons;
 
   const lessonToDelete = lessons.find((lesson) => lesson.id === lessonId);
-
+ 
   if(!lessonToDelete) {
     return {
         status: "error",
@@ -326,25 +326,25 @@ export async function deleteLesson({
 
   const remainingLessons = lessons.filter((lesson) => lesson.id !== lessonId);
 
-  const upadates = remainingLessons.map((lesson, index) => {
+  const updates = remainingLessons.map((lesson, index) => {
     return prisma.lesson.update({
         where: { id: lesson.id },
         data: { position: index + 1 },
     });
   });
 
-  await prisma.$transaction([
-    ...upadates,
+   await prisma.$transaction([
+    ...updates, 
     prisma.lesson.delete({
         where: {
-            id:  lessonId,
+            id: lessonId,
             chapterId: chapterId,
         },
     }),
-  ]);
+   ]);
 
   revalidatePath(`/admin/courses/${courseId}/edit`);
-
+  
   return {
     status: "success",
     message: "Lesson deleted and positions reordered successfully.",
@@ -405,7 +405,7 @@ export async function deleteChapter({
   const remainingChapters = chapters.filter(
     (chap) => chap.id !== chapterId);
 
-  const upadates = remainingChapters.map((chap, index) => {
+  const updates = remainingChapters.map((chap, index) => {
     return prisma.chapter.update({
         where: { id: chap.id },
         data: { position: index + 1 },
@@ -413,7 +413,7 @@ export async function deleteChapter({
   });
 
   await prisma.$transaction([
-    ...upadates,
+    ...updates,
     prisma.lesson.delete({
         where: {
             id:  chapterId,

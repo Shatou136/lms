@@ -1,4 +1,4 @@
-"use client";
+ "use client";
 
 import { useCallback, useEffect, useState } from "react";
 import {FileRejection, useDropzone} from "react-dropzone";
@@ -255,11 +255,14 @@ try {
   }
 
   if(fileState.objectUrl) {
-    return <RenderUploadedState
+    return (
+    <RenderUploadedState
      previewUrl={fileState.objectUrl}
      handleRemoveFile={handleRemoveFile}
      isDeleting={fileState.isDeleting}
-     />;
+     fileType={fileState.fileType}
+     />
+    );
   }
 
   return <RenderEmptyState isDragActive={isDragActive} />;
@@ -272,6 +275,7 @@ try {
       URL.revokeObjectURL(fileState.objectUrl);
         }
       }; 
+      
       }, [fileState.objectUrl]);
 
     const {getRootProps, getInputProps, isDragActive} = useDropzone({ onDrop,

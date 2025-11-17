@@ -39,7 +39,7 @@ return (
         <Link 
         className={buttonVariants({ variant: "outline", className: "mb-6" })}
         href={`/admin/courses/${courseId}/edit`}>
-        <ArrowLeft className="sizw-4" />
+        <ArrowLeft className="size-4" />
 
         <span>Go Back</span>
         </Link>
@@ -63,7 +63,7 @@ return (
                 <FormItem>
                  <FormLabel>Lesson Name</FormLabel> 
                   <FormControl>
-                    <Input placeholder="Chapter yxz" {...field} />
+                    <Input placeholder="Lesson Name" {...field} />
                   </FormControl> 
                   <FormMessage />
                 </FormItem>

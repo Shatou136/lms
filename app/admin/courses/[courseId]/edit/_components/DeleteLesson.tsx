@@ -54,7 +54,7 @@ export function DeleteLesson({
         This action cannot be undone. This will permanently delete this
          lesson.
       </AlertDialogDescription>
-    </AlertDialogHeader>
+    </AlertDialogHeader>  
     <AlertDialogFooter>
      <AlertDialogCancel>Cancel</AlertDialogCancel>
      <Button 
@@ -66,5 +66,5 @@ export function DeleteLesson({
     </AlertDialogFooter>
    </AlertDialogContent>
   </AlertDialog>    
-    )
+    );  
 }

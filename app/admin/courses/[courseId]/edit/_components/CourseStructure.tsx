@@ -320,11 +320,11 @@ export function CourseStructure({data}: iAppProps) {
                             </p>
                             </div>                     
 
-                           <DeleteChapter chapterId={item.id} courseId={item.id} />
+                           <DeleteChapter chapterId={item.id} courseId={data.id} />
                             </div>
 
                             <CollapsibleContent>
-                             <div className="p-1">
+                             <div className="p-1"> 
                               <SortableContext 
                               items={item.lessons.map((lesson) => lesson.id)}
                                strategy={verticalListSortingStrategy}
@@ -353,9 +353,9 @@ export function CourseStructure({data}: iAppProps) {
                                 </div>
                                 <DeleteLesson 
                                 chapterId={item.id}
-                                courseId={item.id}
-                                lessonId={item.id}
-                                /> 
+                                courseId={data .id}
+                                lessonId={lesson.id}
+                                />  
                                </div>
                                )}
                               </SortableItem>
