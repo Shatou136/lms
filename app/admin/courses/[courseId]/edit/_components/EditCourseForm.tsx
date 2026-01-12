@@ -159,6 +159,7 @@ export function EditCourseForm({data}: iAppProps) {
                                <FormLabel>Thumbnail image</FormLabel>
                                <FormControl>
                                    <Uploader 
+                                   fileTypeAccepted="image"
                                    onChange={field.onChange} 
                                    value={field.value}
                                    />
@@ -246,7 +247,7 @@ export function EditCourseForm({data}: iAppProps) {
                        name="price"
                        render={({ field }) => (
                            <FormItem className="w-full">
-                               <FormLabel>Price(XAFA)</FormLabel>
+                               <FormLabel>Price(XAF)</FormLabel>
                                <FormControl>
                                    <Input placeholder="Price" type="number"{...field} />
                                </FormControl>

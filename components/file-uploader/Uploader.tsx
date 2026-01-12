@@ -282,7 +282,7 @@ try {
       accept: fileTypeAccepted === "video" ? { "video/*": [] } : { "image/*": [] }, 
       maxFiles: 1,
       multiple: false,
-      maxSize: 5 * 1024 * 1024,  // 5mb calculation
+      maxSize: fileTypeAccepted === "image" ? 5 * 1024 * 1024 : 5000 * 1024 * 1024,
       onDropRejected: rejectedFiles,
       disabled: fileState.uploading || !!fileState.objectUrl, 
      });

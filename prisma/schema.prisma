@@ -118,7 +118,7 @@ model Lesson {
 enum CourseLevel {
   Beginner
   Intermediate
-  Adavanced
+  Advanced
 }
 
 enum CourseStatus {

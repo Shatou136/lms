@@ -54,7 +54,7 @@ export function RenderUploadedState({
     fileType: "image" | "video";
 }) {
     return (
-        <div>
+        <div className="relative group w-full h-full flex items-center justify-center">
         {fileType === "video" ? (
            <video src={previewUrl} controls className="rounded-md w-full h-full" /> 
         ): (
