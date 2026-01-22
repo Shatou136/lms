@@ -21,6 +21,10 @@ model User {
   banned        Boolean?  @default(false)
   role          String?
   courses       Course[]
+  enrollment    Enrollment[]
+
+  stripeCustomerId String? @unique
+
   accounts      Account[]
   sessions      Session[]
 
@@ -89,7 +93,21 @@ model Course {
   userId           String
   chapter          Chapter[]
   user             User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  enrollment       Enrollment[]
 }
+
+enum CourseLevel {
+  Beginner
+  Intermediate
+  Advanced
+}
+
+enum CourseStatus {
+  Draft
+  Published
+  Archived
+}
+
 
 model Chapter {
   id        String   @id @default(uuid())
@@ -115,14 +133,26 @@ model Lesson {
   Chapter      Chapter  @relation(fields: [chapterId], references: [id], onDelete: Cascade)
 }
 
-enum CourseLevel {
-  Beginner
-  Intermediate
-  Advanced
+model Enrollment {
+  id        String @id @default(uuid())
+
+  amount    Int
+  status    EnrollmentStatus @default(Pending)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Course    Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  courseId  String
+  User      User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId   String
+
+  @@unique([userId, courseId])
+
+
 }
 
-enum CourseStatus {
-  Draft
-  Published
-  Archived
+enum EnrollmentStatus {
+  Pending
+  Active
+  Cancelled
 }

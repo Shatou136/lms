@@ -1,7 +1,7 @@
 "use server";
 
 import { requireAdmin } from "@/app/data/admin/require-Admin";
-import arcjets, { detectBot, fixedWindow } from "@/lib/arcjets";
+import arcjets, { fixedWindow } from "@/lib/arcjets";
 import { prisma } from "@/lib/db";
 import { ApiResponse } from "@/lib/types";
 import { chapterSchema, ChapterSchemaType, courseSchema, CourseSchemaType, lessonSchema, LessonSchemaType } from "@/lib/zodSchemas";
@@ -10,11 +10,6 @@ import { revalidatePath } from "next/cache";
 
 
   const aj = arcjets.withRule(
-       detectBot({
-           mode: "LIVE",
-           allow: [],
-       })
-   ).withRule(
        fixedWindow({
            mode: "LIVE",
            window: "1m",
