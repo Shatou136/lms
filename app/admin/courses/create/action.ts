@@ -3,6 +3,7 @@
 import { requireAdmin } from "@/app/data/admin/require-Admin";
 import arcjets, { fixedWindow } from "@/lib/arcjets";
 import { prisma } from "@/lib/db";
+import { stripe } from "@/lib/stripe";
 import { ApiResponse } from "@/lib/types";
 import { courseSchema, CourseSchemaType } from "@/lib/zodSchemas";
 import { request } from "@arcjet/next";
@@ -53,11 +54,21 @@ export async function CreateCourse(
     };
  }
 
+ const data = await stripe.products.create({
+    name: validation.data.title,
+    description: validation.data.smallDescription,
+    default_price_data: {
+        currency: "xaf",
+        unit_amount: validation.data.price * 100, // in centimes
+    },
+ });
+
   await prisma.course.create({
     data: {
         ...validation.data,
-        userId:  session?.user.id as string,
-    },
+        userId: session?.user.id as string,
+        stripePriceId: data.default_price as string,
+     },
  });
 
  return {
@@ -65,7 +76,8 @@ export async function CreateCourse(
     message: "Course created successfully",
  }
 
-    } catch {
+    } catch (error) {
+        console.error("CreateCourse error:", error);
         return {
             status: "error",
             message: "Failed to create course"

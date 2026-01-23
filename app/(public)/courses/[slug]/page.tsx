@@ -256,8 +256,8 @@ return (
 
                   {isEnrolled ? (
                     <Link 
+                    className={buttonVariants({className: "w-full"})}
                     href="/dashboard"
-                    className={buttonVariants({ className: "w-full"})}
                     >
                       Watch Course
                     </Link>

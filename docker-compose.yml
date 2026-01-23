@@ -1,0 +1,15 @@
+version: "3.9"
+
+services:
+  backend:
+    container_name: lms-backend
+    build: .
+    ports:
+      - "3000:3000"
+
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+
+    environment:
+      NODE_ENV: development
