@@ -7,7 +7,7 @@ import { authClient } from "@/lib/auth-client";
 import { buttonVariants } from "@/components/ui/button";
 import { UserDropdown } from "./UserDropdown";
 
-const navigationsItems = [
+const navigationItems = [
     {name: "Home", href: "/"},
     {name: "Courses", href: "/courses"},
     {name: "Dashboard", href: "/dashboard"},
@@ -27,7 +27,7 @@ export function Navbar() {
       {/* Desktop navigation */}
       <nav className="hidden md:flex md:flex-1 md:items-center md:justify-between">
         <div className="flex items-center space-x-2">
-          {navigationsItems.map((item) => (
+          {navigationItems.map((item) => (
             <Link key={item.name} href={item.href} className="text-sm font-medium 
             transition-colors hover:text-primary">
           {item.name}
