@@ -98,10 +98,10 @@ export default function LoginForm() {
                         </div>
         
                         <Button
-                        onClick={signInWithEmail}
-                        disabled={emailPending}
+                       onClick={signInWithEmail}
+                       disabled={emailPending}
                         >
-                        {email ? (
+                        {emailPending ? (
                             <>
                             <Loader2 className="size-4 animate-spin" />
                             <span>Loading...</span>
