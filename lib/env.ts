@@ -17,14 +17,21 @@ export const env = createEnv({
     AWS_REGION: z.string().min(1),
     STRIPE_SECRET_KEY: z.string().min(1),
     STRIPE_WEBHOOK_SECRET: z.string().min(1),
+    CLOUDINARY_CLOUD_NAME: z.string().min(1),
+    CLOUDINARY_API_KEY: z.string().min(1),
+    CLOUDINARY_API_SECRET: z.string().min(1),
+
+
   },
   
   client: {
-    NEXT_PUBLIC_S3_BUCKET_NAME_IMAGES: z.string().min(1),
+     NEXT_PUBLIC_S3_BUCKET_NAME_IMAGES: z.string().min(1),
+    NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: z.string().min(1),
   },
   
   // For Next.js >= 13.4.4, you only need to destructure client variables:
    experimental__runtimeEnv:  {
-    NEXT_PUBLIC_S3_BUCKET_NAME_IMAGES: process.env.NEXT_PUBLIC_S3_BUCKET_NAME_IMAGES
+     NEXT_PUBLIC_S3_BUCKET_NAME_IMAGES: process.env.NEXT_PUBLIC_S3_BUCKET_NAME_IMAGES,
+    NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME
    },
 });
