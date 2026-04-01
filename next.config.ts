@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
 images: {
   remotePatterns: [
     {
-      hostname: "shatou-lms.t3.storage.dev",
+      hostname: "shatoulms.t3.storage.dev",
       port: "",
       protocol: "https",
     },
