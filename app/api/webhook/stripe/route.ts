@@ -35,7 +35,7 @@ export async function POST(req: Request) {
 
 
         if(!courseId) {
-            throw new Error("Course id nor found...");
+            throw new Error("Course id not found...");
         }
 
         const user = await prisma.user.findUnique({

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
 import { buttonVariants } from "@/components/ui/button";
@@ -23,9 +24,9 @@ export default function PaymentSuccessful() {
                         <CheckIcon className="size-12 p-2 bg-green-500/30 text-green-500 rounded-full" />
                     </div>
                     <div className="mt-3 text-center sm:mt-5 w-full">
-                        <h2 className="text-xl font-semibold">Payment Successful</h2>
+                        <h2 className="text-xl font-semibold">Payment Successfull</h2>
                         <p className="text-sm mt-2 text-muted-foreground tracking-tight text-balance">
-                         Congrats your payment was successful. You can now have access to the course!
+                         Congrats your payment was successfull. You can now have access to the course!
                         </p>
 
                         <Link

@@ -144,7 +144,7 @@ export async function enrollInCourseAction(courseId: string): Promise<ApiRespons
                 customer: stripeCustomerId,
                 line_items: [
                     {
-                        price: "price_1Ss6fDBZy2d097sUV76PAiHJ",
+                        price: "price_1THiFyI8otO7dxwddx9jvkqQ",
                         quantity: 1,
                     },
                 ],
@@ -166,6 +166,7 @@ export async function enrollInCourseAction(courseId: string): Promise<ApiRespons
 
 
         checkoutUrl = result.checkoutUrl as string;
+
     } catch (error) {
        if(error instanceof Stripe.errors.StripeError) {
         return {

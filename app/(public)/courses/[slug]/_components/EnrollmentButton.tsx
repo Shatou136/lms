@@ -15,7 +15,8 @@ export function EnrollmentButton({courseId}: {courseId: string}) {
      // 2. Define a submit handler.
      function onSubmit() {
       startTransition(async () => {
-       const {data: result, error} = await tryCatch(enrollInCourseAction(courseId));
+       const {data: result, error} = await tryCatch(enrollInCourseAction(courseId)
+       );
    
        if(error) {
            toast.error("An unexpected error occurred. Please try again.");
@@ -39,7 +40,7 @@ export function EnrollmentButton({courseId}: {courseId: string}) {
             {pending ? (
                 <>
                 <Loader2 className="size-4 animate-spin" />
-                Loading ...
+                Loading...
                 </>
             ): (
                 "Enroll Now!"
