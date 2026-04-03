@@ -144,7 +144,15 @@ export async function enrollInCourseAction(courseId: string): Promise<ApiRespons
                 customer: stripeCustomerId,
                 line_items: [
                     {
-                        price: "price_1THiFyI8otO7dxwddx9jvkqQ",
+                        // price: "price_1THiFyI8otO7dxwddx9jvkqQ",
+                        // Create the price inline from the course's actual price in your DB
+            price_data: {
+                currency: "xaf", // Change to "xaf" if you want CFA Francs
+                unit_amount: course.price * 1, // Stripe expects amount in cents
+                product_data: {
+                    name: course.title, // Shows the course name in Stripe checkout
+                },
+            },
                         quantity: 1,
                     },
                 ],
@@ -168,6 +176,7 @@ export async function enrollInCourseAction(courseId: string): Promise<ApiRespons
         checkoutUrl = result.checkoutUrl as string;
 
     } catch (error) {
+        console.error("Enrollment error:", error); // ← ADD THIS LINE
        if(error instanceof Stripe.errors.StripeError) {
         return {
             status: "error",
