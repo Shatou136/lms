@@ -9,6 +9,11 @@ import { LessonItem } from "./LessonItem";
 import { usePathname } from "next/navigation";
 import { useCourseProgress } from "@/hooks/use-course-progress";
 
+// Add this import at the top of CourseSidebar.tsx:
+import { Award } from "lucide-react";
+import Link from "next/link";
+import { buttonVariants } from "@/components/ui/button";
+
 
 interface iAppProps {
     course: CourseSidebarDataType["course"];
@@ -95,7 +100,27 @@ export function CourseSidebar({ course }: iAppProps) {
              </CollapsibleContent>
             </Collapsible>
          ))}
+
+
+        {/* Certificate button — only shown when 100% complete */}
+{progressPercentage === 100 && (
+  <div className="mt-4 pr-4">
+    <Link
+      href={`/dashboard/${course.slug}/certificate`}
+      className={buttonVariants({
+        className: "w-full gap-2",
+        variant: "default",
+      })}
+    >
+      <Award className="size-4" />
+      View My Certificate
+    </Link>
+  </div>
+)}         
+
+
         </div>
+        
       </div>
     )
 }

@@ -38,7 +38,10 @@ export async function adminGetEnrollmentStats() {
     }
 
     enrollments.forEach((enrollment) => {
-        const enrollmentDate = enrollment.createdAt.toDateString().split("T")[0];
+        // const enrollmentDate = enrollment.createdAt.toDateString().split("T")[0];
+
+        // FIX:
+        const enrollmentDate = enrollment.createdAt.toISOString().split("T")[0];
         const dayIndex = last30Days.findIndex((day) => day.date === enrollmentDate);
 
         if(dayIndex !== -1) {

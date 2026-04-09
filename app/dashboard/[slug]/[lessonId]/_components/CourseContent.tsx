@@ -59,27 +59,57 @@ export function CourseContent({data}: iAppProps) {
    );
  }
 
-    // 2. Define a submit handler.
-   function onSubmit() {
-    startTransition(async () => {
-     const {data: result, error} = await tryCatch(
-        markLessonComplete(data.id, data.Chapter.Course.slug)
-     );
+  //   // 2. Define a submit handler.
+  //  function onSubmit() {
+  //   startTransition(async () => {
+  //    const {data: result, error} = await tryCatch(
+  //       markLessonComplete(data.id, data.Chapter.Course.slug)
+  //    );
  
-     if(error) {
-         toast.error("An unexpected error occurred. Please try again.");
-         return;
-     }
+  //    if(error) {
+  //        toast.error("An unexpected error occurred. Please try again.");
+  //        return;
+  //    }
  
-     if(result.status === "success") {
-         toast.success(result.message);
-         triggerConfetti();
-     } else if(result.status === "error") {
-         toast.error(result.message);
-     }
+  //    if(result.status === "success") {
+  //        toast.success(result.message);
+  //        triggerConfetti();
+  //    } else if(result.status === "error") {
+  //        toast.error(result.message);
+  //    }
  
-    });
-   }
+  //   });
+  //  }
+
+
+  // Replace the onSubmit function (lines 63-82):
+function onSubmit() {
+  startTransition(async () => {
+    const { data: result, error } = await tryCatch(
+      markLessonComplete(data.id, data.Chapter.Course.slug)
+    );
+
+    if (error) {
+      toast.error("An unexpected error occurred. Please try again.");
+      return;
+    }
+
+    if (result.status === "success") {
+      toast.success(result.message);
+      triggerConfetti();
+
+      // If the whole course is now complete, show a bigger celebration
+      if (result.courseCompleted) {
+        // Extra confetti burst for course completion
+        setTimeout(() => triggerConfetti(), 600);
+        setTimeout(() => triggerConfetti(), 1200);
+      }
+    } else if (result.status === "error") {
+      toast.error(result.message);
+    }
+  });
+}
+
 
     return (
      <div className="flex flex-col h-full bg-background pl-6">

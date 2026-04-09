@@ -43,11 +43,16 @@ const data = {
       url: "/admin/courses",
       icon: IconListDetails,
     },
+    // {
+    //   title: "Analytics",
+    //   url: "#",
+    //   icon: IconChartBar,
+    // },
     {
-      title: "Analytics",
-      url: "#",
-      icon: IconChartBar,
-    },
+  title: "Analytics",
+  url: "/admin/analytics",   // ← real page
+  icon: IconChartBar,
+},
     {
       title: "Projects",
       url: "#",
