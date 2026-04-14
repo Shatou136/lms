@@ -5,7 +5,6 @@ import { requireAdmin } from "./require-Admin";
 
 export async function adminGetCourses() {
 
-    await new Promise((resolve) => setTimeout(resolve, 2000));
 
     await requireAdmin();
 

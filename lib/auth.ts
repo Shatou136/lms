@@ -29,6 +29,7 @@ database: prismaAdapter(prisma, {
             },
         }),
 
+ 
         admin(),
     ],
 });

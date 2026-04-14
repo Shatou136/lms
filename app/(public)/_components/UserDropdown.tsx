@@ -4,6 +4,7 @@ import {
   Home,
   LayoutDashboardIcon,
   LogOutIcon,
+  ShieldIcon,
 } from "lucide-react"
 
 import {
@@ -29,9 +30,10 @@ interface iAppProps {
   name: string;
   email: string;
   image: string;
+   role?: string; // Add this
 }
 
-export function UserDropdown({ email, name, image }: iAppProps) {
+export function UserDropdown({ email, name, image, role }: iAppProps) {
  const handleSignOut = useSignOut();
 
   return (
@@ -78,6 +80,14 @@ export function UserDropdown({ email, name, image }: iAppProps) {
             <span>Dashboard</span>
             </Link>
           </DropdownMenuItem>
+          {role === "admin" && (
+           <DropdownMenuItem asChild>
+          <Link href="/admin">
+          <ShieldIcon size={16} className="opacity-60" aria-hidden="true" />
+          <span>Admin Panel</span>
+    </Link>
+  </DropdownMenuItem>
+)}
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
        

@@ -571,9 +571,7 @@ export async function enrollWithMobileMoneyAction(
       //   • The API would send a USSD push to the user's phone
       //   • You would then wait for a webhook callback confirming payment
       //
-      // For this demo, we wait 1.5 seconds to simulate the API call,
-      // then assume the payment always succeeds.
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      
 
       // In demo mode, payment always succeeds:
       const demoPaymentSucceeded = true;

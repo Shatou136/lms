@@ -46,6 +46,7 @@ export function Navbar() {
                   ? session.user.name
                   : session?.user.email.split("@")[0] 
                 }
+                  role={session.user.role ?? undefined}  // Add this line
               />
               ): (
                 <>

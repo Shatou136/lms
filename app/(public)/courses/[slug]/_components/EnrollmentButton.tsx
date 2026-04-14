@@ -290,6 +290,24 @@ import { Label } from "@/components/ui/label";
 // Mobile money provider type
 type MomoProvider = "mtn" | "orange";
 
+// MTN logo — yellow background with MTN text (brand-accurate)
+function MtnLogo() {
+  return (
+    <div className="w-12 h-12 rounded-lg bg-[#FFCC00] flex items-center justify-center">
+      <span className="text-black font-black text-xs tracking-tight">MTN</span>
+    </div>
+  );
+}
+
+// Orange Money logo — orange background with OM text
+function OrangeLogo() {
+  return (
+    <div className="w-12 h-12 rounded-lg bg-[#FF6600] flex items-center justify-center">
+      <span className="text-white font-black text-xs tracking-tight">OM</span>
+    </div>
+  );
+}
+
 export function EnrollmentButton({ courseId }: { courseId: string }) {
   const [stripePending, startStripeTransition] = useTransition();
   const [momoPending, startMomoTransition] = useTransition();
@@ -330,26 +348,48 @@ export function EnrollmentButton({ courseId }: { courseId: string }) {
       return;
     }
 
+    // startMomoTransition(async () => {
+    //   const { data: result, error } = await tryCatch(
+    //     enrollWithMobileMoneyAction(courseId, provider, cleanPhone)
+    //   );
+
+    //   if (error) {
+    //     toast.error("An unexpected error occurred. Please try again.");
+    //     return;
+    //   }
+
+    //   if (result.status === "success") {
+    //     setMomoOpen(false);
+    //     toast.success(result.message);
+    //     // Note: the server action calls redirect() to /payment/success
+    //     // so the page will navigate automatically
+    //   } else if (result.status === "error") {
+    //     toast.error(result.message);
+    //   }
+    // });
+  
+
     startMomoTransition(async () => {
-      const { data: result, error } = await tryCatch(
-        enrollWithMobileMoneyAction(courseId, provider, cleanPhone)
-      );
-
-      if (error) {
-        toast.error("An unexpected error occurred. Please try again.");
-        return;
-      }
-
-      if (result.status === "success") {
-        setMomoOpen(false);
-        toast.success(result.message);
-        // Note: the server action calls redirect() to /payment/success
-        // so the page will navigate automatically
-      } else if (result.status === "error") {
-        toast.error(result.message);
-      }
-    });
+  try {
+    const result = await enrollWithMobileMoneyAction(courseId, provider, cleanPhone);
+    // If we reach here without redirect, it's a real error response
+    if (result && result.status === "error") {
+      toast.error(result.message);
+    }
+    // On success, the server redirects — we never reach here
+  } catch (e: unknown) {
+    // Next.js redirect() throws internally — it is NOT a real error.
+    // We must let it propagate, not show an error toast.
+    const err = e as { digest?: string };
+    if (err?.digest?.startsWith("NEXT_REDIRECT")) {
+      throw e; // let Next.js handle the redirect
+    }
+    toast.error("An unexpected error occurred. Please try again.");
   }
+});
+  
+  }
+
 
   const isAnyPending = stripePending || momoPending;
 
@@ -417,7 +457,8 @@ export function EnrollmentButton({ courseId }: { courseId: string }) {
                       : "border-border hover:border-muted-foreground/50"
                   }`}
                 >
-                  <span className="text-3xl">🟡</span>
+                  {/* <span className="text-3xl">🟡</span> */}
+                 <MtnLogo />
                   <span className="text-sm font-semibold">MTN MoMo</span>
                 </button>
 
@@ -431,7 +472,8 @@ export function EnrollmentButton({ courseId }: { courseId: string }) {
                       : "border-border hover:border-muted-foreground/50"
                   }`}
                 >
-                  <span className="text-3xl">🟠</span>
+                  {/* <span className="text-3xl">🟠</span> */}
+                  <OrangeLogo />
                   <span className="text-sm font-semibold">Orange Money</span>
                 </button>
 
@@ -461,7 +503,7 @@ export function EnrollmentButton({ courseId }: { courseId: string }) {
               </p>
             </div>
 
-            {/* Demo notice banner */}
+            {/* Demo notice banner
             <div className="rounded-md bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 p-3">
               <p className="text-xs text-blue-700 dark:text-blue-300 leading-relaxed">
                 <strong>⚠️ Demo Mode:</strong> This simulates a Mobile Money
@@ -470,7 +512,7 @@ export function EnrollmentButton({ courseId }: { courseId: string }) {
                 the{" "}
                 {provider === "mtn" ? "MTN MoMo API" : "Orange Money API"}.
               </p>
-            </div>
+            </div> */}
 
             {/* Confirm button */}
             <Button

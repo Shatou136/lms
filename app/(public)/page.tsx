@@ -213,12 +213,12 @@ export default function Home() {
 
         <div className="flex flex-col items-center text-center space-y-6 max-w-4xl mx-auto">
           <Badge variant="outline" className="px-4 py-1.5 text-sm font-medium">
-            🎓 A Learning Platform Built for Cameroon
+            🎓 The future of Online Education
           </Badge>
 
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight">
-            Learn Skills That{" "}
-            <span className="text-primary">Open Doors</span>
+            Elevate your{" "}
+            <span className="text-primary"> Learning Experience</span>
           </h1>
 
           <p className="max-w-2xl text-muted-foreground md:text-xl leading-relaxed">

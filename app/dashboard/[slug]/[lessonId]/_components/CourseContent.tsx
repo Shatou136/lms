@@ -102,7 +102,8 @@ function onSubmit() {
       if (result.courseCompleted) {
         // Extra confetti burst for course completion
         setTimeout(() => triggerConfetti(), 600);
-        setTimeout(() => triggerConfetti(), 1200);
+         setTimeout(() => triggerConfetti(), 600);
+        // setTimeout(() => triggerConfetti(), 1200);
       }
     } else if (result.status === "error") {
       toast.error(result.message);

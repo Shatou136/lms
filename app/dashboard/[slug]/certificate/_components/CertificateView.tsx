@@ -137,14 +137,20 @@ export function CertificateView({
       </div>
 
       {/* Print styles */}
-      <style jsx global>{`
-        @media print {
-          body * { visibility: hidden; }
-          .print\\:hidden { display: none !important; }
-          [ref="certRef"], [ref="certRef"] * { visibility: visible; }
-          @page { size: landscape; margin: 0.5cm; }
-        }
-      `}</style>
+      /
+<style jsx global>{`
+  @media print {
+    body * { visibility: hidden; }
+    .print\\:hidden { display: none !important; }
+    .certificate-content, .certificate-content * { visibility: visible; }
+    .certificate-content { 
+      position: fixed; 
+      left: 0; top: 0; 
+      width: 100%; 
+    }
+    @page { size: landscape; margin: 0.5cm; }
+  }
+`}</style>
     </div>
   );
 }
