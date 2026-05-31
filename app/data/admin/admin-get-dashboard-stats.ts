@@ -23,7 +23,7 @@ export async function adminGetDashboardStats() {
 
         //total courses
         prisma.course.count(),
-
+                                                              
         //total lessons 
         prisma.lesson.count(),
     ]);
